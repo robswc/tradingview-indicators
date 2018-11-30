@@ -2,6 +2,7 @@
 //Made by @robswc
 //2018
 //Measure the average volatility percent, see how much percentage wise an asset has recently been moving.
+//Tutorial here: https://youtu.be/uRYBW7LKtxg
 study("AVP")
 length = input(defval=9, title="Length")
 
