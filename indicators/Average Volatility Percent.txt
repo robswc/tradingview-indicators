@@ -1,0 +1,15 @@
+//@version=3
+//Made by @robswc
+//2018
+//Measure the average volatility percent, see how much percentage wise an asset has recently been moving.
+study("AVP")
+length = input(defval=9, title="Length")
+
+//Difference = abs(close - open)
+
+Difference = abs((close - open)/((close + open)/2) * 100)
+
+MovingAverage = sma(Difference, length)
+
+plot(Difference, style=columns)
+plot(MovingAverage, color=orange)
