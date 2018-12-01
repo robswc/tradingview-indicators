@@ -1,0 +1,21 @@
+//@version=3
+//made by @robswc (just took OBV and put it into an RSI)
+//An RSI, using OBV as the source, use to find divergence in the OBV to indicate reversals.
+//Tutorial on youtube: https://youtu.be/klC8U2XLovs
+study(title="On Balance Volume RSI", shorttitle="OBV RSI")
+
+//inputs & variables
+len = input(14, title="Length")
+src = close
+
+//obv = to volume if change > 0, else obv = -volume or 0 if no change.
+obv = cum(change(src) > 0 ? volume : change(src) < 0 ? -volume : 0*volume)
+
+//obv_rsi is set to rsi function using obv as the source and len variable as the length.
+obv_rsi = rsi(obv, len)
+
+//plot varible, draw lines
+plot(obv_rsi, color=orange, title="OBV", linewidth=2)
+top = hline(70)
+bottom = hline(30)
+fill(top, bottom, color=aqua, transp=90)
