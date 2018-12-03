@@ -1,0 +1,23 @@
+//@version=3
+//made by @robswc 2018
+//Find more indicators here: https://github.com/Robswc/tradingview-indicators
+//Youtube: https://www.youtube.com/channel/UCxokFZgGpztPTeQvBwIk2wQ
+
+//Name Study, set overlay to true, so it appears on the main chart
+study("Night Hours", overlay=true)
+
+//declare input variables
+sleep = input(defval=2, minval=0, maxval=23, title="Sleep")
+wake = input(defval=9, minval=0, maxval=23, title="Wake")
+
+//set night equal to true or false, based on the condition
+night = (sleep - hour) * (hour - wake) >= 0 ? true : false
+
+//set the background color to black, transparent 98 if night = true
+bgcolor(night ? black : na, transp=98)
+
+//visualization, extra code to visualize how this script works, remove overlay=true before adding these lines though.
+//plot(hour)
+//hline(sleep)
+//hline(wake)
+
