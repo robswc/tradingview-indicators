@@ -1,0 +1,18 @@
+//@version=2
+//Made by @robswc
+//YouTube: https://www.youtube.com/channel/UCxokFZgGpztPTeQvBwIk2wQ
+//This indicator shows the difference between the real open and heikin ashi open.
+//This is useful for seeing how strong the percent difference between them is.
+//ONLY WORKS ON NORMAL CANDLE CHART
+
+study("Heikin Ashi vs True Price")
+
+//setting variables, heikin ashi close and heikin ashi open
+hac = (open + high + low + close) / 4
+hao = na(hao[1]) ? (open + close) / 2 : (hao[1] + hac[1]) / 2
+
+//set variable dif to percent difference between heikin ashi open and actual open.
+dif = (hao - open) / abs(open) * 100
+
+//plot dif variable
+plot(dif, style=columns, color=aqua)
