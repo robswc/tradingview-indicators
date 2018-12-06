@@ -1,0 +1,40 @@
+//@version=3
+//Made by @robswc v0.1
+//2018
+//Helps to find the best targets for a given timeframe.
+//Green bar shows decent targets for trades, black shows the average price movment in percent for X bars back.
+
+study("Average Volatility Movement", shorttitle="AVM")
+
+//how many bars back to consider for the average
+length = input(defval=55, title="Length")
+
+//difference variable, basic percent difference
+difference = abs((close - open)/((close + open)/2) * 100)
+//moving average using difference as the source and length as the count back period
+movingAverage = sma(difference, length)
+//target, simply 3 x the average of bars
+target = movingAverage * 3
+
+//horizontal lines
+h1 = hline(1.00, linestyle=dotted)
+h2 = hline(0.75, linestyle=dotted)
+h3 = hline(0.50, linestyle=dotted)
+h4 = hline(0.25, linestyle=dotted)
+h5 = hline(1.25, linestyle=dotted)
+h6 = hline(1.50, linestyle=dotted)
+h7 = hline(1.75, linestyle=dotted)
+h8 = hline(2.00, linestyle=dotted)
+
+//filling function, fill between lines
+fill(h4,h3, color=#26A69A, transp=50)
+fill(h3,h2, color=#26A69A, transp=75)
+fill(h2,h1, color=orange, transp=50)
+fill(h1,h5, color=orange, transp=75)
+fill(h5,h6, color=red, transp=50)
+fill(h6,h7, color=red, transp=75)
+fill(h7,h8, color=red, transp=90)
+
+//plot variables onto chart
+plot(movingAverage, color=black, linewidth=2)
+plot(target, color=green)
