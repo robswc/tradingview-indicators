@@ -1,0 +1,10 @@
+// This is a useful little function that can be used as a condition.  For example.
+// Say you only want to signal a "buy" only during certain hours.  You can do this by
+// adjusting the hours on this function and using it as a condition. I.e.
+// if condition_a AND condition_b AND test_epoch()
+//      strategy.enter
+
+test_epoch() =>
+    test_start_hour = input(0)
+    test_stop_hour = input(9)
+    hour >= test_start_hour and hour <= test_stop_hour ? true : false
